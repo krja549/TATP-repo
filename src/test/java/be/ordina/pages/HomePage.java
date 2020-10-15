@@ -23,4 +23,12 @@ public class HomePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(accountButton));
         driver.findElement(accountButton).click();
     }
+
+    public void playFirstMovie() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(firstMovieThumbnail));
+        wait.until(ExpectedConditions.elementToBeClickable(firstMovieThumbnail));
+        driver.findElement(firstMovieThumbnail).click();
+        WebElement consentModal = driver.findElement(By.xpath("/html/body/div[2]/div/div/div"));
+        wait.until(ExpectedConditions.visibilityOf(consentModal));
+    }
 }
