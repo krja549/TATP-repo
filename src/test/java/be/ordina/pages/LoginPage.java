@@ -11,6 +11,8 @@ public class LoginPage {
     private final WebDriverWait wait;
 
     private final By btnSignup = By.className("signup");
+    private final By btnSignin = By.className("signin");
+    private final By btnLaunch = By.className("launch");
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -23,5 +25,16 @@ public class LoginPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(btnSignup));
         driver.findElement(btnSignup).click();
         return new LoginModal(driver);
+    }
+
+    public LoginModal clickSigninButton() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(btnSignin));
+        driver.findElement(btnSignin).click();
+        return new LoginModal(driver);
+    }
+    public HomePage clickLaunchButton() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(btnLaunch));
+        driver.findElement(btnLaunch).click();
+        return new HomePage(driver);
     }
 }
