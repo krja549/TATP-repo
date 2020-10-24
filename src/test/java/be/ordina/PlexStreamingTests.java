@@ -1,24 +1,28 @@
 package be.ordina;
 
+import be.ordina.pages.ConsentModal;
 import be.ordina.pages.HomePage;
 import be.ordina.pages.LoginModal;
 import be.ordina.pages.LoginPage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.Assert.*;
+
 public class PlexStreamingTests {
 
     private WebDriver driver;
-    private String emailAddress;
     private LoginPage loginPage;
     private LoginModal loginModal;
     private HomePage homePage;
+    private ConsentModal consent;
 
     /*
      * US2. As a user, I want to be able to start a stream directly from the home page.
@@ -38,7 +42,7 @@ public class PlexStreamingTests {
         driver.manage().deleteAllCookies();
 
         String uuid = UUID.randomUUID().toString();
-        emailAddress = uuid + "@mailinator.com";
+        String emailAddress = uuid + "@mailinator.com";
 
         loginPage = new LoginPage(driver);
 
@@ -54,7 +58,11 @@ public class PlexStreamingTests {
     }
 
     @Test
-    public void successfulRegistration() {
-        homePage.playFirstMovie();
+    public void clickingPlayBtnStartsVideoPlayer() {
+        consent = homePage.playFirstMovie();
+        consent.clickAgreeButton();
+        homePage.waitForVideoPlayerToStart();
+
+        assertTrue(driver.findElement(By.id("plex")).getAttribute("class").contains("show-video-player"));
     }
 }

@@ -41,4 +41,10 @@ public class LoginModal {
         wait.until(ExpectedConditions.urlToBe("https://app.plex.tv/desktop"));
         return new HomePage(driver);
     }
+    public LoginPage clickLoginButton() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(btnSubmit));
+        driver.findElement(btnSubmit).click();
+        wait.until(ExpectedConditions.urlToBe("https://www.plex.tv/nl/?signUp=0"));
+        return new LoginPage(driver);
+    }
 }
