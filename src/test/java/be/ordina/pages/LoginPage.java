@@ -35,6 +35,7 @@ public class LoginPage {
     public HomePage clickLaunchButton() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(btnLaunch));
         driver.findElement(btnLaunch).click();
+        wait.until(ExpectedConditions.urlToBe("https://app.plex.tv/desktop"));
         return new HomePage(driver);
     }
 }
