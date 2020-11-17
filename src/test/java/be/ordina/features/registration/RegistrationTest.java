@@ -1,5 +1,6 @@
-package be.ordina;
+package be.ordina.features.registration;
 
+import be.ordina.BaseTest;
 import be.ordina.pages.HomePage;
 import be.ordina.pages.LoginPage;
 import be.ordina.pages.LoginModal;
@@ -15,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
-public class PlexRegistrationTests {
+public class RegistrationTest extends BaseTest {
 
     private WebDriver driver;
 

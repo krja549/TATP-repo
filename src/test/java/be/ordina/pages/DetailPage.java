@@ -5,14 +5,23 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class DetailPage {
+public class DetailPage extends BasePage {
 
-    private final WebDriver driver;
-    private final WebDriverWait wait;
     private final By content = By.id("content");
+    private final By btnAddToWatchlist = By.cssSelector("button[data-qa-id$='addToWatchlist']");
+    private final By btnRemoveFromWatchlist = By.cssSelector("button[data-qa-id$='removeFromWatchlist']");
 
     public DetailPage(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, 10);
+        super(driver);
+    }
+
+    public void clickAddToWatchlistButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(btnAddToWatchlist));
+        driver.findElement(btnAddToWatchlist).click();
+    }
+
+    public void clickRemoveFromWatchlistButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(btnRemoveFromWatchlist));
+        driver.findElement(btnRemoveFromWatchlist).click();
     }
 }
