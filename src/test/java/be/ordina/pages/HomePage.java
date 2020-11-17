@@ -4,23 +4,19 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class HomePage {
-
-    private final WebDriver driver;
-    private final WebDriverWait wait;
+public class HomePage extends BasePage {
 
     private final By firstMovieThumbnail = By.xpath("//*[@id=\"content\"]/div/div/div[2]/div[2]/div[1]/div[1]/div[2]/div/div/div[1]/div/a");
     private final By accountButton = By.id("id-10");
     private final By tbSearch = By.cssSelector("input[data-qa-id='quickSearchInput']");
     private final By searchSuggestionsOverlay = By.xpath("//*[@id=\"plex\"]/div[2]/div/div[1]/div/div[2]");
-    private final By searchSuggestionItems = By.cssSelector("input[data-qa-id='quickSearchItemButton']");
-
+    private final By searchSuggestionItems = By.cssSelector("div[data-qa-id='quickSearchItemButton']");
+    private final By menuItems = By.cssSelector("div[data-qa-id='sidebarSource']");
+    //private final By menuItems = By.xpath("//*[@id=\"content\"]/div/div/div[1]/div/div/div/div[2]/a");
 
     public HomePage(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, 30);
+        super(driver);
     }
 
     public void clickAccountButton() {
@@ -45,12 +41,22 @@ public class HomePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchSuggestionsOverlay));
     }
 
-    public DetailPage clickFirstSearchSuggestionItem() throws InterruptedException {
+    public DetailPage clickFirstSearchSuggestionItem() {
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(searchSuggestionItems));
         WebElement firstSearchSuggestionItem = driver.findElements(searchSuggestionItems).get(0);
-        driver.findElementsLocated()
         wait.until(ExpectedConditions.elementToBeClickable(firstSearchSuggestionItem));
-        Thread.sleep(2000);
         firstSearchSuggestionItem.click();
         return new DetailPage(driver);
+    }
+
+    public void selectItemFromMenu(int index) {
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(menuItems));
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElements(menuItems).get(index)));
+        driver.findElements(menuItems).get(index).click();
+    }
+
+    public MoviesAndShowsPage goToMoviesAndShows() {
+        selectItemFromMenu(1);
+        return new MoviesAndShowsPage(driver);
     }
 }

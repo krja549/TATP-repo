@@ -3,20 +3,15 @@ package be.ordina.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginModal {
-
-    private final WebDriver driver;
-    private final WebDriverWait wait;
+public class LoginModal extends BasePage {
 
     By tbEmail = By.id("email");
     By tbPassword = By.id("password");
     By btnSubmit = By.xpath("//*[@id=\"plex\"]/div/div/div/div[1]/form/button");
 
     public LoginModal(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, 10);
+        super(driver);
         this.driver.switchTo().frame("fedauth-iFrame");
     }
 
