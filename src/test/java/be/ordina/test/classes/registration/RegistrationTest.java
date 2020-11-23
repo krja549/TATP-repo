@@ -1,6 +1,6 @@
-package be.ordina.features.registration;
+package be.ordina.test.classes.registration;
 
-import be.ordina.BaseTest;
+import be.ordina.test.classes.BaseTest;
 import be.ordina.pages.HomePage;
 import be.ordina.pages.LoginPage;
 import be.ordina.pages.LoginModal;
@@ -61,5 +61,20 @@ public class RegistrationTest extends BaseTest {
 
         //Acceptance criterion: After registration, the user is automatically logged in
         assertTrue(driver.findElement(By.id("id-10")).isDisplayed());
+    }
+
+    @Test
+    public void signOutAfterLogin() {
+        String uuid = UUID.randomUUID().toString();
+        String emailAddress = uuid + "@mailinator.com";
+
+        LoginPage loginPage = new LoginPage(driver);
+
+        LoginModal loginModal = loginPage.clickSignupButton();
+        loginModal.enterCredentials(emailAddress,"PlexTest123");
+
+        HomePage homePage = loginModal.clickSubmitButton();
+
+        homePage.signOut();
     }
 }

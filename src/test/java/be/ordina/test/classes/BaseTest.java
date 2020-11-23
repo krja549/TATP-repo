@@ -1,10 +1,13 @@
-package be.ordina;
+package be.ordina.test.classes;
 
 import be.ordina.pages.HomePage;
 import be.ordina.pages.LoginModal;
 import be.ordina.pages.LoginPage;
+import org.junit.After;
+import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -12,19 +15,23 @@ import java.util.concurrent.TimeUnit;
 public abstract class BaseTest {
 
     private WebDriver driver;
+    private WebDriverWait wait;
     private LoginPage loginPage;
     private LoginModal loginModal;
     private HomePage homePage;
 
+    // initialize a browser driver, connect to servers
+    @Before
     public void setUpBeforeTestClass() {
-        System.setProperty("webdriver.chrome.driver","/Users/krja/Documents/Work/3. Ordina/Training/AQuA/webdrivers/chromedriver");
+        System.setProperty("webdriver.chrome.driver","/Users/krja/Documents/Work/3. Ordina/Training/AQuA/webdrivers/chromedriver 2");
         driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, 10);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().deleteAllCookies();
     }
 
-    //automatically logs in an existing account
+    // automatically logs in an existing account
     public void signInBeforeTestMethod() {
         loginPage = new LoginPage(driver);
 
@@ -35,7 +42,7 @@ public abstract class BaseTest {
         homePage = loginPage.clickLaunchButton();
     }
 
-    //creates a random user account and automatically logs it in
+    // creates a random user account and automatically logs it in
     public void signUpBeforeTestMethod() {
         loginPage = new LoginPage(driver);
 
@@ -45,12 +52,15 @@ public abstract class BaseTest {
         homePage = loginModal.clickSubmitButton();
     }
 
-    public void logOutAfterTestMethod() {
-        // e.g., logout of the app, if necessary
+    // logout of the app
+    public void signOutAfterTestMethod() {
+        homePage.signOut();
     }
 
+    // close connections, close browser
+    @After
     public void tearDownAfterTestClass() {
-        driver.close();
+        driver.quit();
     }
 
     // Some getters and setters we need throughout our tests

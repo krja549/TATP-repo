@@ -1,7 +1,6 @@
-package be.ordina.features.streaming;
+package be.ordina.test.classes.streaming;
 
 import be.ordina.pages.ConsentModal;
-import be.ordina.pages.HomePage;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
@@ -18,16 +17,13 @@ public class ClickingPlayBtnStartsVideoPlayerTest extends StreamingTest {
      * - The movie starts streaming
      */
 
-    private HomePage homePage;
     private ConsentModal consent;
 
     @Test
     public void clickingPlayBtnStartsVideoPlayer() {
-        homePage = getHomePage();
-
-        consent = homePage.playFirstMovie();
+        consent = getHomePage().playFirstMovie();
         consent.clickAgreeButton();
-        homePage.waitForVideoPlayerToStart();
+        getHomePage().waitForVideoPlayerToStart();
 
         assertTrue(getDriver().findElement(By.id("plex")).getAttribute("class").contains("show-video-player"));
     }

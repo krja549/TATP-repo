@@ -6,11 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-
 public class Watchlist extends BasePage {
 
     private final By counter = By.xpath("//*[@id=\"content\"]/div/div/div[2]/div[2]/div[1]/span[2]");

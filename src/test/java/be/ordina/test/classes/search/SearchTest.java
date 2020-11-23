@@ -1,10 +1,10 @@
-package be.ordina.features.search;
+package be.ordina.test.classes.search;
 
-import be.ordina.BaseTest;
+import be.ordina.test.classes.BaseTest;
 import org.junit.After;
 import org.junit.Before;
 
-public class SearchTest extends BaseTest {
+public abstract class SearchTest extends BaseTest {
 
     @Before
     public void setUpBeforeTestClass() {

@@ -1,10 +1,10 @@
-package be.ordina.features.streaming;
+package be.ordina.test.classes.streaming;
 
-import be.ordina.BaseTest;
+import be.ordina.test.classes.BaseTest;
 import org.junit.After;
 import org.junit.Before;
 
-public class StreamingTest extends BaseTest {
+public abstract class StreamingTest extends BaseTest {
 
     @Before
     public void setUpBeforeTestClass() {
@@ -14,6 +14,11 @@ public class StreamingTest extends BaseTest {
     @Before
     public void signUpBeforeTestMethod() {
         super.signUpBeforeTestMethod();
+    }
+
+    @After
+    public void signOutAfterTestMethod() {
+        super.signOutAfterTestMethod();
     }
 
     @After

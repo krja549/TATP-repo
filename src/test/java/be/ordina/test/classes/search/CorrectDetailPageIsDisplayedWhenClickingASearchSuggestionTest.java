@@ -1,4 +1,4 @@
-package be.ordina.features.search;
+package be.ordina.test.classes.search;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
